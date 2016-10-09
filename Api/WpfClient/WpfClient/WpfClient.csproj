@@ -127,6 +127,7 @@
       <DependentUpon>Chat.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChatViewModel.cs" />
+    <Compile Include="CommandHandler.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>

@@ -45,7 +45,11 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
-            <TextBox Name="MessageTextBox" Grid.Row="2" KeyDown="SendMessage"></TextBox>
+            <TextBox Name="MessageTextBox" Grid.Row="2" Text="{Binding Message,UpdateSourceTrigger=PropertyChanged}" MaxLength="500">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SendMessage}"></KeyBinding>
+                </TextBox.InputBindings>
+            </TextBox>
         </Grid>
 
         <Controls:ProgressRing Name="ProgressRing" IsActive="True"></Controls:ProgressRing>

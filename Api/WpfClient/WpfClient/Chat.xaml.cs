@@ -51,15 +51,6 @@ namespace WpfClient
             ChatRunning = _chatViewModel.Initialize();
         }
 
-        private void SendMessage(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Enter && !String.IsNullOrEmpty(this.MessageTextBox.Text))
-            {
-                _chatViewModel.Send(this.MessageTextBox.Text);
-                this.MessageTextBox.Clear();
-            }
-        }
-
         private void Clear(object sender, RoutedEventArgs e)
         {
             _chatViewModel.Messages.Clear();
