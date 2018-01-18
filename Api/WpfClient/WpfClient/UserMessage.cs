@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace WpfClient
 {
@@ -12,6 +13,8 @@ namespace WpfClient
         public string Sender { get; set; }
 
         public string Message { get; set; }
+
+        public BitmapImage Image { get; set; }
 
         public bool IsLocal { get; set; }
 

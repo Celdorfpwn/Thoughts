@@ -38,7 +38,8 @@
                                 <WrapPanel>
                                     <TextBlock Text="{Binding Sender}" Visibility="{Binding Visibility}" FontWeight="Bold" />
                                     <TextBlock Text=": " FontWeight="Bold" Visibility="{Binding Visibility}" />
-                                    <TextBlock Text="{Binding Message}" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+                                    <Image Source="{Binding Image}"></Image>
+                                    <!--<TextBlock Text="{Binding Message}" TextWrapping="Wrap" HorizontalAlignment="Stretch" />-->
                                 </WrapPanel>
                             </Border>
                         </DataTemplate>

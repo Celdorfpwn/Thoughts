@@ -32,7 +32,7 @@ namespace WpfClient
         private static void ScrollViewer_SizeChanged(object sender, EventArgs e)
         {
             var scrollViewer = sender as ScrollViewer;
-            scrollViewer?.ScrollToEnd();
+            scrollViewer.ScrollToEnd();
         }
 
         public static bool GetAutoScroll(DependencyObject obj)

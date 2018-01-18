@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace WpfClient
@@ -41,7 +44,7 @@ namespace WpfClient
         {
             try
             {
-                _hubConnection = new HubConnection("http://thoughtsapi.azurewebsites.net/chat");
+                _hubConnection = new HubConnection/*("http://localhost:5700/chat");*/("http://thoughtsapi.azurewebsites.net/chat");
                 BuildChatProxy();
                 return true;
             }
@@ -57,8 +60,31 @@ namespace WpfClient
 
             _chatProxy.On<UserMessage>("Receive", message =>
              {
+
                  _dispatcher.Invoke(() => {
-                     Messages.Add(message);
+                     try
+                     {
+
+                         if(_username.Equals(message.Sender))
+                         {
+                             message.IsLocal = true;
+                         }
+
+                         var c = new WebClient();
+                         var bytes = c.DownloadData(new Uri(message.Message));
+                         var ms = new MemoryStream(bytes);
+                         message.Image = new BitmapImage();
+
+                         message.Image.BeginInit();
+                         message.Image.StreamSource = ms;
+                         message.Image.EndInit();
+
+                         Messages.Add(message);
+                     }
+                     catch(Exception)
+                     {
+
+                     }
    
                  }); 
              });
@@ -68,12 +94,6 @@ namespace WpfClient
 
         private void SendMessageAction()
         {
-            Messages.Add(new UserMessage
-            {
-                Message = Message,
-                Sender = _username,
-                IsLocal = true
-            });
             _chatProxy.Invoke("Send", _username, Message);
             Message = String.Empty;
             OnPropertyChanged("Message");
